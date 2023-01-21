@@ -44,3 +44,44 @@ function setTimer() {
         ]
     }
 ]
+var start = true;
+
+function quiz(id) {
+
+    var result = document.getElementsByClassName("result");
+    result[0].innerHTML = "";
+
+    var question = document.getElementById("question");
+
+    question.innerHTML = questionairre[id].q;
+
+    var option1 = document.getElementById('option1');
+    var option2 = document.getElementById('option2');
+    var option3 = document.getElementById('option3');
+    var option4 = document.getElementById('option4');
+
+    option1.innerHTML = questionairre[id].a[0].text;
+    option2.innerHTML = questionairre[id].a[1].text;
+    option3.innerHTML = questionairre[id].a[2].text;
+    option4.innerHTML = questionairre[id].a[3].text;
+
+    option1.innerHTML = questionairre[id].a[0].isCorrect;
+    option2.innerHTML = questionairre[id].a[1].isCorrect;
+    option3.innerHTML = questionairre[id].a[2].isCorrect;
+    option4.innerHTML = questionairre[id].a[3].isCorrect;
+
+    var selected = "";
+
+    const button = document.getElementsByClassName("option");
+
+    button[0].addEventListener("click", () => {
+        if (selected == "true"){
+            result[0].innerHTML = "True";
+            result[0].getElementsByClassName.color = "green";  
+        } else {
+            result[0].innerHTML = "False";
+            result[0].style.color = "red";
+        }
+    })
+}
+
