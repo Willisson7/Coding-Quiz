@@ -46,7 +46,7 @@ var questionairre = [{
 }
 ]
 var start = true;
-
+var id = 0;
 function quiz(id) {
 
     var result = document.getElementsByClassName("result");
@@ -93,10 +93,17 @@ function quiz(id) {
             result[0].innerHTML = "False!";
             result[0].style.color = "red";
         }
+        quiz(id + 1);
     }
 }
 
-if (start) {
-    quiz("0");
-}
+
+var startBegin = document.getElementById("begin")
+
+startBegin.addEventListener("click", function(){
+    document.getElementById("begin").style.display="none";
+    document.getElementById("invis").classList.remove("hidden");
+    quiz(id);
+    }
+)
 
