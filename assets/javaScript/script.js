@@ -3,46 +3,47 @@ var timeEl = document.querySelector("#countdown")
 var secondsLeft = 10;
 
 function setTimer() {
-    var timerInterval = setInterval(function(){
+    var timerInterval = setInterval(function () {
         secondsLeft--;
         timeEl.textContent = secondsLeft + " seconds left!";
-        
-        if(secondsLeft === 0) {
-            clearInterval(timerInterval)};
-        }, 1000); 
-    }
 
-    setTimer();
+        if (secondsLeft === 0) {
+            clearInterval(timerInterval)
+        };
+    }, 1000);
+}
 
-    var questionairre = [{
+setTimer();
 
-        id: 0,
+var questionairre = [{
 
-        q: "In JavaScript, an Array can store which of the following?",
-        a:[{text:"Integers", isCorrect: false },
-           {text:"Objects", isCorrect: false },
-           {text:"functions", isCorrect: false},
-           {text:"All of the above", isCorrect: true},
-        ]
-    },
-    {
-        id: 1, 
-        q: "Commonly used data types do NOT include:",
-        a: [{text:"Booleans", isCorrect: false },
-            {text:"Strings", isCorrect: false },
-            {text:"Alerts", isCorrect: true},
-            {text:"Numbers", isCorrect: false,}
+    id: 0,
+
+    q: "In JavaScript, an Array can store which of the following?",
+    a: [{ text: "Integers", isCorrect: false },
+    { text: "Objects", isCorrect: false },
+    { text: "functions", isCorrect: false },
+    { text: "All of the above", isCorrect: true },
     ]
-    },
-    {
-        id: 2, 
-        q: "The condition in an if/else staement is enclosed with in ____.",
-        a: [{text:"Quotes", isCorrect: false },
-            {text:"Curly Brackets", isCorrect: false },
-            {text:"Parentheses", isCorrect: true},
-            {text:"SquareBrackets", isCorrect: false,}
-        ]
-    }
+},
+{
+    id: 1,
+    q: "Commonly used data types do NOT include:",
+    a: [{ text: "Booleans", isCorrect: false },
+    { text: "Strings", isCorrect: false },
+    { text: "Alerts", isCorrect: true },
+    { text: "Numbers", isCorrect: false, }
+    ]
+},
+{
+    id: 2,
+    q: "The condition in an if/else staement is enclosed with in ____.",
+    a: [{ text: "Quotes", isCorrect: false },
+    { text: "Curly Brackets", isCorrect: false },
+    { text: "Parentheses", isCorrect: true },
+    { text: "SquareBrackets", isCorrect: false, }
+    ]
+}
 ]
 var start = true;
 
@@ -60,28 +61,42 @@ function quiz(id) {
     var option3 = document.getElementById('option3');
     var option4 = document.getElementById('option4');
 
-    option1.innerHTML = questionairre[id].a[0].text;
-    option2.innerHTML = questionairre[id].a[1].text;
-    option3.innerHTML = questionairre[id].a[2].text;
-    option4.innerHTML = questionairre[id].a[3].text;
+    option1.innerText = questionairre[id].a[0].text;
+    option2.innerText = questionairre[id].a[1].text;
+    option3.innerText = questionairre[id].a[2].text;
+    option4.innerText = questionairre[id].a[3].text;
 
-    option1.innerHTML = questionairre[id].a[0].isCorrect;
-    option2.innerHTML = questionairre[id].a[1].isCorrect;
-    option3.innerHTML = questionairre[id].a[2].isCorrect;
-    option4.innerHTML = questionairre[id].a[3].isCorrect;
+    option1.dataset.answer = questionairre[id].a[0].isCorrect;
+    option2.dataset.answer = questionairre[id].a[1].isCorrect;
+    option3.dataset.answer = questionairre[id].a[2].isCorrect;
+    option4.dataset.answer = questionairre[id].a[3].isCorrect;
 
-    var selected = "";
+    
+
+
 
     const button = document.getElementsByClassName("option");
 
-    button[0].addEventListener("click", () => {
-        if (selected == "true"){
-            result[0].innerHTML = "True";
-            result[0].getElementsByClassName.color = "green";  
+
+    for (var i = 0; i < button.length; i++) {
+        button[i].addEventListener('click', checkAnswer);
+
+    }
+
+    function checkAnswer(e) {
+        console.log(typeof(e.target.dataset.answer));
+        console.log(e.target.dataset.answer);
+        if (e.target.dataset.answer == "true") {
+            result[0].innerHTML = "True!";
+            e.target.style.backgroundColor = "green";
         } else {
-            result[0].innerHTML = "False";
+            result[0].innerHTML = "False!";
             result[0].style.color = "red";
         }
-    })
+    }
+}
+
+if (start) {
+    quiz("0");
 }
 
