@@ -13,7 +13,7 @@ function setTimer() {
     }, 1000);
 }
 
-var questionairre = [{
+var questionaire = [{
 
     id: 0,
 
@@ -47,28 +47,34 @@ var questionairre = [{
 
 var id = 0;
 function quiz(id) {
-
+    // check to see if id is greater than last item in array
+    console.log(id, questionaire.length -1);
+    if (id > questionaire.length-1) {
+        return;
+    }
     var result = document.getElementsByClassName("result");
     result[0].innerHTML = "";
 
     var question = document.getElementById("question");
 
-    question.innerHTML = questionairre[id].q;
+    question.innerHTML = questionaire[id].q;
+
+    // console.log("questionaire[id] " + JSON.stringify.questionaire[id])
 
     var option1 = document.getElementById('option1');
     var option2 = document.getElementById('option2');
     var option3 = document.getElementById('option3');
     var option4 = document.getElementById('option4');
 
-    option1.innerText = questionairre[id].a[0].text;
-    option2.innerText = questionairre[id].a[1].text;
-    option3.innerText = questionairre[id].a[2].text;
-    option4.innerText = questionairre[id].a[3].text;
+    option1.innerText = questionaire[id].a[0].text;
+    option2.innerText = questionaire[id].a[1].text;
+    option3.innerText = questionaire[id].a[2].text;
+    option4.innerText = questionaire[id].a[3].text;
 
-    option1.dataset.answer = questionairre[id].a[0].isCorrect;
-    option2.dataset.answer = questionairre[id].a[1].isCorrect;
-    option3.dataset.answer = questionairre[id].a[2].isCorrect;
-    option4.dataset.answer = questionairre[id].a[3].isCorrect;
+    option1.dataset.answer = questionaire[id].a[0].isCorrect;
+    option2.dataset.answer = questionaire[id].a[1].isCorrect;
+    option3.dataset.answer = questionaire[id].a[2].isCorrect;
+    option4.dataset.answer = questionaire[id].a[3].isCorrect;
    
 
 
@@ -96,8 +102,9 @@ function quiz(id) {
             result[0].innerHTML = "False!";
             result[0].style.color = "red";
         }
-    //   setTimeOut(quiz, 2000);
-      quiz(id + 1);
+      setTimeout(function(){
+        quiz(id + 1);
+      }, 2000);
     } 
 }
 
