@@ -13,8 +13,6 @@ function setTimer() {
     }, 1000);
 }
 
-setTimer();
-
 var questionairre = [{
 
     id: 0,
@@ -32,12 +30,12 @@ var questionairre = [{
     a: [{ text: "Booleans", isCorrect: false },
     { text: "Strings", isCorrect: false },
     { text: "Alerts", isCorrect: true },
-    { text: "Numbers", isCorrect: false, }
+    { text: "Numbers", isCorrect: false},
     ]
 },
 {
     id: 2,
-    q: "The condition in an if/else staement is enclosed with in ____.",
+    q: "The condition in an if/else statement is enclosed within ____.",
     a: [{ text: "Quotes", isCorrect: false },
     { text: "Curly Brackets", isCorrect: false },
     { text: "Parentheses", isCorrect: true },
@@ -45,7 +43,8 @@ var questionairre = [{
     ]
 }
 ]
-var start = true;
+// var start = true;
+
 var id = 0;
 function quiz(id) {
 
@@ -70,6 +69,8 @@ function quiz(id) {
     option2.dataset.answer = questionairre[id].a[1].isCorrect;
     option3.dataset.answer = questionairre[id].a[2].isCorrect;
     option4.dataset.answer = questionairre[id].a[3].isCorrect;
+   
+
 
     
 
@@ -79,11 +80,13 @@ function quiz(id) {
 
 
     for (var i = 0; i < button.length; i++) {
+
         button[i].addEventListener('click', checkAnswer);
 
     }
 
-    function checkAnswer(e) {
+
+  function checkAnswer(e) {
         console.log(typeof(e.target.dataset.answer));
         console.log(e.target.dataset.answer);
         if (e.target.dataset.answer == "true") {
@@ -93,14 +96,15 @@ function quiz(id) {
             result[0].innerHTML = "False!";
             result[0].style.color = "red";
         }
-        quiz(id + 1);
-    }
+    //   setTimeOut(quiz, 2000);
+      quiz(id + 1);
+    } 
 }
-
 
 var startBegin = document.getElementById("begin")
 
 startBegin.addEventListener("click", function(){
+    setTimer();
     document.getElementById("begin").style.display="none";
     document.getElementById("invis").classList.remove("hidden");
     quiz(id);
