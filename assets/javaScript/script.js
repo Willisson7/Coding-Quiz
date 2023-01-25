@@ -1,27 +1,9 @@
-
+// declared global variables
 var timeEl = document.querySelector("#countdown")
 var secondsLeft = 10;
 var score = 0;
-
-
-function setTimer() {
-    var timerInterval = setInterval(function () {
-        secondsLeft--;
-        timeEl.textContent = secondsLeft + " seconds left!";
-
-        if (secondsLeft === 0) {
-            quizScore();
-            clearInterval(timerInterval)
-        };
-    }, 1000);
-}
-
-function quizScore() {
-
-    document.getElementById("scoreTotal").innerHTML = score;
-
-}
-
+var startBegin = document.getElementById("begin")
+var id = 0;
 var questionaire = [{
 
     id: 0,
@@ -52,9 +34,25 @@ var questionaire = [{
     ]
 }
 ]
-// var start = true;
+// declared functions
+function setTimer() {
+    var timerInterval = setInterval(function () {
+        secondsLeft--;
+        timeEl.textContent = secondsLeft + " seconds left!";
 
-var id = 0;
+        if (secondsLeft === 0) {
+            quizScore();
+            clearInterval(timerInterval)
+        };
+    }, 1000);
+}
+
+function quizScore() {
+
+    document.getElementById("scoreTotal").innerHTML = score;
+
+}
+
 function quiz(id) {
     // check to see if id is greater than last item in array
     console.log(id, questionaire.length - 1);
@@ -80,19 +78,17 @@ function quiz(id) {
     option3.innerText = questionaire[id].a[2].text;
     option4.innerText = questionaire[id].a[3].text;
 
+    // option1.style.backgroundColor("tomato");
+    // option2.style.backgroundColor("tomato");
+    // option3.style.backgroundColor("tomato");
+    // option4.style.backgroundColor("tomato");
+
     option1.dataset.answer = questionaire[id].a[0].isCorrect;
     option2.dataset.answer = questionaire[id].a[1].isCorrect;
     option3.dataset.answer = questionaire[id].a[2].isCorrect;
     option4.dataset.answer = questionaire[id].a[3].isCorrect;
 
-
-
-
-
-
-
     const button = document.getElementsByClassName("option");
-
 
     for (var i = 0; i < button.length; i++) {
 
@@ -114,17 +110,14 @@ function quiz(id) {
             result[0].innerHTML = "Incorrect!";
             result[0].style.color = "red";
         }
-        setTimeout(function () {
-            quiz(id + 1);
-        }, 2000);
-
-        checkAnswer.reset();
-
     }
+    setTimeout(function () {
+        quiz(id + 1);
+    }, 2000);
 }
 
-var startBegin = document.getElementById("begin")
 
+// add event listener
 startBegin.addEventListener("click", function () {
     setTimer();
     document.getElementById("begin").style.display = "none";
@@ -132,4 +125,3 @@ startBegin.addEventListener("click", function () {
     quiz(id);
 }
 )
-
