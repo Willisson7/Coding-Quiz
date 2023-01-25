@@ -110,10 +110,10 @@ function quiz(id) {
             result[0].innerHTML = "Incorrect!";
             result[0].style.color = "red";
         }
+        setTimeout(function () {
+            quiz(id + 1);
+        }, 2000);
     }
-    setTimeout(function () {
-        quiz(id + 1);
-    }, 2000);
 }
 
 
