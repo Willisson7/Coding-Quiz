@@ -1,6 +1,8 @@
 
 var timeEl = document.querySelector("#countdown")
 var secondsLeft = 10;
+var score = 0;
+
 
 function setTimer() {
     var timerInterval = setInterval(function () {
@@ -8,9 +10,16 @@ function setTimer() {
         timeEl.textContent = secondsLeft + " seconds left!";
 
         if (secondsLeft === 0) {
+            quizScore();
             clearInterval(timerInterval)
         };
     }, 1000);
+}
+
+function quizScore() {
+
+    document.getElementById("scoreTotal").innerHTML = score;
+
 }
 
 var questionaire = [{
@@ -30,7 +39,7 @@ var questionaire = [{
     a: [{ text: "Booleans", isCorrect: false },
     { text: "Strings", isCorrect: false },
     { text: "Alerts", isCorrect: true },
-    { text: "Numbers", isCorrect: false},
+    { text: "Numbers", isCorrect: false },
     ]
 },
 {
@@ -48,8 +57,8 @@ var questionaire = [{
 var id = 0;
 function quiz(id) {
     // check to see if id is greater than last item in array
-    console.log(id, questionaire.length -1);
-    if (id > questionaire.length-1) {
+    console.log(id, questionaire.length - 1);
+    if (id > questionaire.length - 1) {
         return;
     }
     var result = document.getElementsByClassName("result");
@@ -75,10 +84,10 @@ function quiz(id) {
     option2.dataset.answer = questionaire[id].a[1].isCorrect;
     option3.dataset.answer = questionaire[id].a[2].isCorrect;
     option4.dataset.answer = questionaire[id].a[3].isCorrect;
-   
 
 
-    
+
+
 
 
 
@@ -92,29 +101,35 @@ function quiz(id) {
     }
 
 
-  function checkAnswer(e) {
-        console.log(typeof(e.target.dataset.answer));
+    function checkAnswer(e) {
+        console.log(typeof (e.target.dataset.answer));
         console.log(e.target.dataset.answer);
+
         if (e.target.dataset.answer == "true") {
-            result[0].innerHTML = "True!";
+            score++;
+            console.log("test", score)
+            result[0].innerHTML = "Correct!";
             e.target.style.backgroundColor = "green";
         } else {
-            result[0].innerHTML = "False!";
+            result[0].innerHTML = "Incorrect!";
             result[0].style.color = "red";
         }
-      setTimeout(function(){
-        quiz(id + 1);
-      }, 2000);
-    } 
+        setTimeout(function () {
+            quiz(id + 1);
+        }, 2000);
+
+        checkAnswer.reset();
+
+    }
 }
 
 var startBegin = document.getElementById("begin")
 
-startBegin.addEventListener("click", function(){
+startBegin.addEventListener("click", function () {
     setTimer();
-    document.getElementById("begin").style.display="none";
+    document.getElementById("begin").style.display = "none";
     document.getElementById("invis").classList.remove("hidden");
     quiz(id);
-    }
+}
 )
 
